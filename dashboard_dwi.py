@@ -1,10 +1,3 @@
-"""
-Author: Andrew Benedictus Jamesie
-Date: 25/06/2023
-This is the func.py module.
-Usage:
-- Initiate all functions for streamlit dashboard
-"""
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,16 +6,15 @@ import streamlit as st
 plt.style.use('dark_background')
 
 
-def create_df_yr(df):
-  """Initialize the function to get the year DataFrame
+def create_df_yr(hour_df):
 
   Args:
-      df (DataFrame): DataFrame of the dataset used
+      hour_df (DataFrame): DataFrame of the dataset used
 
   Returns:
       DataFrame: DataFrame that has been processed for the year attribute
   """
-  df_year = df.groupby('yr').instant.nunique().reset_index()
+  df_year = hour_df.groupby('yr').instant.nunique().reset_index()
   df_year.rename(
     columns={
       'instant': 'sum'
@@ -33,16 +25,16 @@ def create_df_yr(df):
   return df_year
 
 
-def create_df_holiday(df):
+def create_df_holiday(hour_df):
   """Initialize the function to get the holiday DataFrame
 
   Args:
-      df (DataFrame): DataFrame of the dataset used
+      hour_df (DataFrame): DataFrame of the dataset used
 
   Returns:
       DataFrame: DataFrame that has been processed for the holiday attribute
   """
-  df_holiday = df.groupby('holiday').instant.nunique().reset_index()
+  df_holiday = hour_df.groupby('holiday').instant.nunique().reset_index()
   df_holiday.rename(
     columns={
       'instant': 'sum'
@@ -53,7 +45,7 @@ def create_df_holiday(df):
   return df_holiday
 
 
-def create_df_working_day(df):
+def create_df_working_day(hour_df):
   """Initialize the function to get the working day DataFrame
 
   Args:
@@ -73,7 +65,7 @@ def create_df_working_day(df):
   return df_workingday
 
 
-def create_df_weathersit(df):
+def create_df_weathersit(hour_df):
   """Initialize the function to get the weathersit DataFrame
 
   Args:
@@ -82,7 +74,7 @@ def create_df_weathersit(df):
   Returns:
       DataFrame: DataFrame that has been processed for the weathersit attribute
   """
-  df_weathersit = df.groupby('weathersit').instant.nunique().reset_index()
+  df_weathersit = hour_df.groupby('weathersit').instant.nunique().reset_index()
   df_weathersit.rename(
     columns={
       'instant': 'sum'
@@ -93,7 +85,7 @@ def create_df_weathersit(df):
   return df_weathersit
 
 
-def create_df_season(df):
+def create_df_season(hour_df):
   """Initialize the function to get the season DataFrame
 
   Args:
@@ -102,7 +94,7 @@ def create_df_season(df):
   Returns:
       DataFrame: DataFrame that has been processed for the season attribute
   """
-  df_season = df.groupby('season').instant.nunique().reset_index()
+  df_season = hour_df.groupby('season').instant.nunique().reset_index()
   df_season.rename(
     columns={
       'instant': 'sum'
@@ -113,7 +105,7 @@ def create_df_season(df):
   return df_season
 
 
-def sidebar(df):
+def sidebar(hour_df):
   """Initialize the function to create sidebar
 
   Args:
@@ -122,7 +114,7 @@ def sidebar(df):
   Returns:
       date_input: date input
   """
-  df['dteday'] = pd.to_datetime(df['dteday'])
+  hour_df['dteday'] = pd.to_datetime(df['dteday'])
   min_date = df['dteday'].min()
   max_date = df['dteday'].max()
 
@@ -143,7 +135,7 @@ def sidebar(df):
     return date
 
 
-def year(df):
+def year(hour_df):
   """Initialize the function to create year plot
 
   Args:
@@ -176,7 +168,7 @@ def year(df):
   st.pyplot(fig)
 
 
-def month(df):
+def month(hour_df):
   """Initialize the function to create month plot
 
   Args:
@@ -188,7 +180,7 @@ def month(df):
   plt.grid(color='lightgray', linestyle='dashed', linewidth=1.5)
   plt.margins(0.1)
   sns.barplot(
-    data=df.sort_values(by='mnth', ascending=False),
+    data=hour_df.sort_values(by='mnth', ascending=False),
     x='cnt',
     y='mnth',
     orient='h',
@@ -209,7 +201,7 @@ def month(df):
   st.pyplot(fig)
 
 
-def hour(df):
+def hour(hour_df):
   """Initialize the function to create hour plot
 
   Args:
@@ -221,7 +213,7 @@ def hour(df):
   plt.grid(color='lightgray', linestyle='dashed', linewidth=1.5)
   plt.margins(0.1)
   sns.barplot(
-    data=df.sort_values(by='hr', ascending=False),
+    data=hour_df.sort_values(by='hr', ascending=False),
     x='cnt',
     y='hr',
     orient='h',
@@ -242,7 +234,7 @@ def hour(df):
   st.pyplot(fig)
 
 
-def holiday(df):
+def holiday(hour_df):
   """Initialize the function to create holiday plot
 
   Args:
@@ -306,7 +298,7 @@ def working_day(df):
   st.pyplot(fig)
 
 
-def weathersit(df):
+def weathersit(hourdf):
   """Initialize the function to create weathersit plot
 
   Args:
@@ -318,7 +310,7 @@ def weathersit(df):
   plt.grid(color='lightgray', linestyle='dashed', linewidth=1.5)
   plt.margins(0.1)
   sns.barplot(
-    data=df.sort_values(by='weathersit', ascending=False),
+    data=hour_df.sort_values(by='weathersit', ascending=False),
     x='sum',
     y='weathersit',
     orient='h',
@@ -339,7 +331,7 @@ def weathersit(df):
   st.pyplot(fig)
 
 
-def season(df):
+def season(hour_df):
   """Initialize the function to create season plot
 
   Args:
@@ -351,7 +343,7 @@ def season(df):
   plt.grid(color='lightgray', linestyle='dashed', linewidth=1.5)
   plt.margins(0.1)
   sns.barplot(
-    data=df.sort_values(by='season', ascending=False),
+    data=hour_df.sort_values(by='season', ascending=False),
     x='sum',
     y='season',
     orient='h',
