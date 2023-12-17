@@ -23,7 +23,7 @@ hour_df.rename(columns={
     'yr': 'tahun',
     'mnth': 'bulan',
     'weathersit': 'kondisi_cuaca',
-    'cnt': 'jumlah'
+    'cnt': 'count'
 }, inplace=True)
 
 # Mengubah angka menjadi keterangan
