@@ -7,37 +7,37 @@ import streamlit as st
 sns.set(style='dark')
 
 # Menyiapkan data hour_df
-day_df = pd.read_csv("hour.csv")
-day_df.head()
+hour_df = pd.read_csv("hour.csv")
+hour_df.head()
 
 # Menghapus kolom yang tidak diperlukan
 drop_col = ['windspeed']
 
-for i in day_df.columns:
+for i in hour_df.columns:
   if i in drop_col:
-    day_df.drop(labels=i, axis=1, inplace=True)
+    hour_df.drop(labels=i, axis=1, inplace=True)
 
 # Mengubah nama judul kolom
-day_df.rename(columns={
+hour_df.rename(columns={
     'dteday': 'dateday',
-    'yr': 'year',
-    'mnth': 'month',
-    'weathersit': 'weather_cond',
-    'cnt': 'count'
+    'yr': 'tahun',
+    'mnth': 'bulan',
+    'weathersit': 'kondisi_cuaca',
+    'cnt': 'jumlah'
 }, inplace=True)
 
 # Mengubah angka menjadi keterangan
-day_df['month'] = day_df['month'].map({
+hour_df['bulan'] = hour_df['bulan'].map({
     1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
     7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
 })
-day_df['season'] = day_df['season'].map({
+hour_df['season'] = hour_df['season'].map({
     1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'
 })
-day_df['weekday'] = day_df['weekday'].map({
+hour_df['weekday'] = hour_df['weekday'].map({
     0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'
 })
-day_df['weather_cond'] = day_df['weather_cond'].map({
+hour_df['kondisi_cuaca'] = hour_df['kondisi_cuaca'].map({
     1: 'Clear/Partly Cloudy',
     2: 'Misty/Cloudy',
     3: 'Light Snow/Rain',
@@ -73,7 +73,7 @@ def create_season_rent_df(df):
 
 # Menyiapkan monthly_rent_df
 def create_monthly_rent_df(df):
-    monthly_rent_df = df.groupby(by='month').agg({
+    monthly_rent_df = df.groupby(by='bulan').agg({
         'count': 'sum'
     })
     ordered_months = [
@@ -106,15 +106,15 @@ def create_holiday_rent_df(df):
 
 # Menyiapkan weather_rent_df
 def create_weather_rent_df(df):
-    weather_rent_df = df.groupby(by='weather_cond').agg({
+    weather_rent_df = df.groupby(by='kondisi_cuaca').agg({
         'count': 'sum'
     })
     return weather_rent_df
 
 
 # Membuat komponen filter
-min_date = pd.to_datetime(day_df['dateday']).dt.date.min()
-max_date = pd.to_datetime(day_df['dateday']).dt.date.max()
+min_date = pd.to_datetime(hour_df['dateday']).dt.date.min()
+max_date = pd.to_datetime(hour_df['dateday']).dt.date.max()
  
 with st.sidebar:
     st.image("https://github.com/dicodingacademy/assets/raw/main/logo.png")
@@ -127,8 +127,8 @@ with st.sidebar:
         value=[min_date, max_date]
     )
 
-main_df = day_df[(day_df['dateday'] >= str(start_date)) & 
-                (day_df['dateday'] <= str(end_date))]
+main_df = hour_df[(hour_df['dateday'] >= str(start_date)) & 
+                (hour_df['dateday'] <= str(end_date))]
 
 # Menyiapkan berbagai dataframe
 daily_rent_df = create_daily_rent_df(main_df)
@@ -145,7 +145,7 @@ weather_rent_df = create_weather_rent_df(main_df)
 # Membuat Dashboard secara lengkap
 
 # Membuat judul
-st.header('Bike Rental Dashboard 🚲')
+st.header('Bike Sharing Dashboard 🚲')
 
 # Membuat jumlah penyewaan harian
 st.subheader('Daily Rentals')
@@ -191,7 +191,7 @@ sns.barplot(
     y='registered',
     data=season_rent_df,
     label='Registered',
-    color='tab:blue',
+    color='tab:green',
     ax=ax
 )
 
@@ -298,4 +298,4 @@ axes[2].tick_params(axis='y', labelsize=10)
 plt.tight_layout()
 st.pyplot(fig)
 
-##st.caption('Copyright (c) Afif Ramadhan 2023')
+##st.caption('Copyright (c) Dwi Prastiana 2023')
