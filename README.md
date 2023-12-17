@@ -3,7 +3,7 @@ The steps to create your virtual environment from this project is as follows:
 
 Clone this Repository
 
-git clone https://github.com/aNdr3W03/Bike-Sharing-Dashboard.git
+git clone https://github.com/saturnusicarus/DataAnalyst.git
 Create Python Virtual Environment
 
 virtualenv venv
