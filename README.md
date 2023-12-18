@@ -8,13 +8,13 @@ git clone https://github.com/saturnusicarus/DataAnalyst.git
 - Create Python Virtual Environment
 
 virtualenv venv
-Activate the Environment
+<br>Activate the Environment
 
 venv\Scripts\activate
-Install All the Requirements Inside "requirements.txt"
+<br>Install All the Requirements Inside "requirements.txt"
 
 pip install -r requirements.txt
-Run the Streamlit Dashboard
+<br>Run the Streamlit Dashboard
 
 streamlit run app.py
-Stop the application program by ctrl + c.
+<br>Stop the application program by ctrl + c.
