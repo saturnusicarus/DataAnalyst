@@ -6,7 +6,7 @@ import streamlit as st
 # Set style seaborn
 sns.set(style='dark')
 
-# Menyiapkan data hour_df
+# Menyiapkan dataset dari hour_df
 hour_df = pd.read_csv("hour.csv")
 hour_df.head()
 
@@ -17,7 +17,7 @@ for i in hour_df.columns:
   if i in drop_col:
     hour_df.drop(labels=i, axis=1, inplace=True)
 
-# Mengubah nama judul kolom
+# Mengubah nama kolom
 hour_df.rename(columns={
     'dteday': 'dateday',
     'yr': 'tahun',
@@ -26,7 +26,7 @@ hour_df.rename(columns={
     'cnt': 'count'
 }, inplace=True)
 
-# Mengubah angka menjadi keterangan
+# Mengubah angka bulan menjadi keterangan
 hour_df['bulan'] = hour_df['bulan'].map({
     1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
     7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
@@ -38,10 +38,10 @@ hour_df['weekday'] = hour_df['weekday'].map({
     0: 'Sun', 1: 'Mon', 2: 'Tue', 3: 'Wed', 4: 'Thu', 5: 'Fri', 6: 'Sat'
 })
 hour_df['kondisi_cuaca'] = hour_df['kondisi_cuaca'].map({
-    1: 'Clear/Partly Cloudy',
-    2: 'Misty/Cloudy',
-    3: 'Light Snow/Rain',
-    4: 'Severe Weather'
+    1: 'Cerah/Sedikit Berawan',
+    2: 'Berkabut/Berawan',
+    3: 'Bersalju Ringan/Hujan',
+    4: 'Cuaca Buruk'
 })
 
 
