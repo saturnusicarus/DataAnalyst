@@ -117,7 +117,7 @@ min_date = pd.to_datetime(hour_df['dateday']).dt.date.min()
 max_date = pd.to_datetime(hour_df['dateday']).dt.date.max()
  
 with st.sidebar:
-    st.image("https://github.com/saturnusicarus/DataAnalyst/blob/main/bike_sharing_dashboard.png")
+    st.image("https://raw.githubusercontent.com/saturnusicarus/DataAnalyst/main/bike_sharing_dashboard.png")
   
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
