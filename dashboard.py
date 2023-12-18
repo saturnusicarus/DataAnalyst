@@ -145,10 +145,10 @@ weather_rent_df = create_weather_rent_df(main_df)
 # Membuat Dashboard secara lengkap
 
 # Membuat judul
-st.header('Bike Sharing Dashboard 🚲')
+st.header('Bike-Sharing Dashboard')
 
-# Membuat jumlah penyewaan harian
-st.subheader('Daily Rentals')
+# Jumlah penyewaan harian
+st.subheader('Sewa Harian')
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -163,8 +163,8 @@ with col3:
     daily_rent_total = daily_rent_df['count'].sum()
     st.metric('Total User', value= daily_rent_total)
 
-# Membuat jumlah penyewaan bulanan
-st.subheader('Monthly Rentals')
+# Jumlah penyewaan bulanan
+st.subheader('Sewa Perbulan')
 fig, ax = plt.subplots(figsize=(24, 8))
 ax.plot(
     monthly_rent_df.index,
@@ -181,8 +181,8 @@ ax.tick_params(axis='x', labelsize=25, rotation=45)
 ax.tick_params(axis='y', labelsize=20)
 st.pyplot(fig)
 
-# Membuat jumlah penyewaan berdasarkan season
-st.subheader('Seasonly Rentals')
+# Jumlah penyewaan berdasarkan season
+st.subheader('Sewa perMusim')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 
@@ -191,7 +191,7 @@ sns.barplot(
     y='registered',
     data=season_rent_df,
     label='Registered',
-    color='tab:green',
+    color='tab:red',
     ax=ax
 )
 
@@ -200,7 +200,7 @@ sns.barplot(
     y='casual',
     data=season_rent_df,
     label='Casual',
-    color='tab:orange',
+    color='tab:yellow',
     ax=ax
 )
 
@@ -215,12 +215,12 @@ ax.tick_params(axis='y', labelsize=15)
 ax.legend()
 st.pyplot(fig)
 
-# Membuah jumlah penyewaan berdasarkan kondisi cuaca
-st.subheader('Weatherly Rentals')
+# Jumlah penyewaan berdasarkan kondisi cuaca
+st.subheader('Sewa berdasarkan Cuaca')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 
-colors=["tab:blue", "tab:orange", "tab:green"]
+colors=["tab:blue", "tab:red", "tab:yellow"]
 
 sns.barplot(
     x=weather_rent_df.index,
@@ -238,14 +238,14 @@ ax.tick_params(axis='x', labelsize=20)
 ax.tick_params(axis='y', labelsize=15)
 st.pyplot(fig)
 
-# Membuat jumlah penyewaan berdasarkan weekday, working dan holiday
-st.subheader('Weekday, Workingday, and Holiday Rentals')
+# Jumlah penyewaan berdasarkan weekday, working dan holiday
+st.subheader('Sewa saat Hari Biasa, Hari Kerja, dan Hari Libur')
 
 fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(15,10))
 
-colors1=["tab:blue", "tab:orange"]
-colors2=["tab:blue", "tab:orange"]
-colors3=["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown", "tab:pink"]
+colors1=["tab:orange", "tab:blue"]
+colors2=["tab:orange", "tab:blue"]
+colors3=["tab:orange", "tab:bluee", "tab:green", "tab:red", "tab:purple", "tab:brown", "tab:pink"]
 
 # Berdasarkan workingday
 sns.barplot(
@@ -258,7 +258,7 @@ sns.barplot(
 for index, row in enumerate(workingday_rent_df['count']):
     axes[0].text(index, row + 1, str(row), ha='center', va='bottom', fontsize=12)
 
-axes[0].set_title('Number of Rents based on Working Day')
+axes[0].set_title('Jumlah Sewa berdasarkan Hari Kerja')
 axes[0].set_ylabel(None)
 axes[0].tick_params(axis='x', labelsize=15)
 axes[0].tick_params(axis='y', labelsize=10)
@@ -274,7 +274,7 @@ sns.barplot(
 for index, row in enumerate(holiday_rent_df['count']):
     axes[1].text(index, row + 1, str(row), ha='center', va='bottom', fontsize=12)
 
-axes[1].set_title('Number of Rents based on Holiday')
+axes[1].set_title('Jumlah Sewa berdasarkan Hari Libur')
 axes[1].set_ylabel(None)
 axes[1].tick_params(axis='x', labelsize=15)
 axes[1].tick_params(axis='y', labelsize=10)
@@ -290,7 +290,7 @@ sns.barplot(
 for index, row in enumerate(weekday_rent_df['count']):
     axes[2].text(index, row + 1, str(row), ha='center', va='bottom', fontsize=12)
 
-axes[2].set_title('Number of Rents based on Weekday')
+axes[2].set_title('Jumlah Sewa berdasarkan Hari Biasa')
 axes[2].set_ylabel(None)
 axes[2].tick_params(axis='x', labelsize=15)
 axes[2].tick_params(axis='y', labelsize=10)
@@ -298,4 +298,4 @@ axes[2].tick_params(axis='y', labelsize=10)
 plt.tight_layout()
 st.pyplot(fig)
 
-##st.caption('Copyright (c) Dwi Prastiana 2023')
+st.caption('Copyright (c) Dwi Prastiana 2023')
