@@ -15,5 +15,5 @@ Dashboard : https://dataanalyst-bikesharingdataset.streamlit.app/
 <br>Install All the Requirements Inside "requirements.txt"
 <br>pip install -r requirements.txt
 <br>Run the Streamlit Dashboard
-<br>streamlit run app.py
+<br>streamlit run dashboard.py
 <br>Stop the application program by ctrl + c.
