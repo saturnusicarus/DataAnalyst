@@ -220,7 +220,7 @@ st.subheader('Sewa berdasarkan Cuaca')
 
 fig, ax = plt.subplots(figsize=(16, 8))
 
-colors=["tab:blue", "tab:red", "tab:yellow"]
+colors=["tab:blue", "tab:red", "tab:purple"]
 
 sns.barplot(
     x=weather_rent_df.index,
