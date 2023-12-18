@@ -200,7 +200,7 @@ sns.barplot(
     y='casual',
     data=season_rent_df,
     label='Casual',
-    color='tab:yellow',
+    color='tab:green',
     ax=ax
 )
 
