@@ -3,7 +3,7 @@ The steps to create your virtual environment from this project is as follows:
 
 - Clone this Repository
 
-git clone https://github.com/saturnusicarus/DataAnalyst.git
+- git clone https://github.com/saturnusicarus/DataAnalyst.git
 
 - Create Python Virtual Environment
 
