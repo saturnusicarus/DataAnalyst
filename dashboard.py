@@ -245,7 +245,7 @@ fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(15,10))
 
 colors1=["tab:orange", "tab:blue"]
 colors2=["tab:orange", "tab:blue"]
-colors3=["tab:orange", "tab:bluee", "tab:green", "tab:red", "tab:purple", "tab:brown", "tab:pink"]
+colors3=["tab:orange", "tab:blue", "tab:green", "tab:red", "tab:purple", "tab:brown", "tab:pink"]
 
 # Berdasarkan workingday
 sns.barplot(
